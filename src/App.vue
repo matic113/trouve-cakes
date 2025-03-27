@@ -5,16 +5,6 @@ import Footer from './components/Footer.vue'
 import Contact from './components/Contact.vue'
 import Gallery from './components/Gallery.vue'
 
-interface Cake {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
-  description: string;
-  customization: string[];
-  category: 'children';
-}
-
 const galleryImages = ref([
   {
     id: 1,
@@ -35,41 +25,6 @@ const galleryImages = ref([
     description: 'Gâteau jurassique avec dinosaures en sucre'
   }
 ])
-
-const cakes = ref<Cake[]>([
-  {
-    id: 1,
-    name: 'Gâteau Superhéros',
-    price: 150,
-    image: '/superhero-cake.jpg',
-    description: 'Gâteau personnalisé avec le superhéros préféré de votre enfant',
-    customization: ['Personnage', 'Taille', 'Saveur', 'Décoration'],
-    category: 'children'
-  },
-  {
-    id: 2,
-    name: 'Gâteau Princesse',
-    price: 150,
-    image: '/princess-cake.jpg',
-    description: 'Gâteau féerique avec décoration de princesse et château',
-    customization: ['Style de château', 'Taille', 'Saveur', 'Décoration'],
-    category: 'children'
-  },
-  {
-    id: 3,
-    name: 'Gâteau Dinosaure',
-    price: 150,
-    image: '/dino-cake.jpg',
-    description: 'Gâteau jurassique avec dinosaures en sucre',
-    customization: ['Type de dinosaure', 'Taille', 'Saveur', 'Décoration'],
-    category: 'children'
-  }
-])
-
-const handleAddToCart = (cake: Cake) => {
-  console.log('Added to cart:', cake)
-  // TODO: Implement cart functionality
-}
 
 const currentRoute = ref('home')
 
