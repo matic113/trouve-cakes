@@ -13,7 +13,7 @@ const handleClick = (route: string) => {
     <h2>Je L'ai Trouvé Pâtisserie</h2>
     <nav>
       <a href="#" class="nav-link" @click.prevent="handleClick('home')">Accueil</a>
-      <a href="#" class="nav-link" @click.prevent="handleClick('products')">Produits</a>
+      <a href="#" class="nav-link" @click.prevent="handleClick('gallery')">Galerie</a>
       <a href="#" class="nav-link" @click.prevent="handleClick('contact')">Contact</a>
     </nav>
   </header>
