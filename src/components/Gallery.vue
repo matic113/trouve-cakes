@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+import ImagePreview from './ImagePreview.vue'
+
 interface GalleryImage {
   id: number;
   title: string;
@@ -6,16 +9,26 @@ interface GalleryImage {
   description: string;
 }
 
-defineProps<{
+const props = defineProps<{
   images: GalleryImage[]
 }>();
+
+const selectedImage = ref<GalleryImage | null>(null)
+
+const openPreview = (image: GalleryImage) => {
+  selectedImage.value = image
+}
+
+const closePreview = () => {
+  selectedImage.value = null
+}
 </script>
 
 <template>
   <section class="gallery">
     <h2>Notre Galerie</h2>
     <div class="gallery-grid">
-      <div v-for="image in images" :key="image.id" class="gallery-item">
+      <div v-for="image in images" :key="image.id" class="gallery-item" @click="openPreview(image)">
         <img :src="image.image" :alt="image.title">
         <div class="gallery-item-content">
           <h3>{{ image.title }}</h3>
@@ -23,6 +36,14 @@ defineProps<{
         </div>
       </div>
     </div>
+
+    <ImagePreview
+      v-if="selectedImage"
+      :image="selectedImage.image"
+      :title="selectedImage.title"
+      :description="selectedImage.description"
+      @close="closePreview"
+    />
   </section>
 </template>
 
@@ -55,6 +76,7 @@ defineProps<{
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
+  cursor: pointer;
 }
 
 .gallery-item:hover {

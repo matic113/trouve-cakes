@@ -1,5 +1,33 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import CtaButton from './CtaButton.vue'
+import ImagePreview from './ImagePreview.vue'
+
+interface EidImage {
+  src: string;
+  alt: string;
+}
+
+const eidImages: EidImage[] = [
+  {
+    src: '/eid_box.jpg',
+    alt: 'Boîte Eid ouverte'
+  },
+  {
+    src: '/eid_box_closed.jpg',
+    alt: 'Boîte Eid fermée'
+  }
+]
+
+const selectedImage = ref<EidImage | null>(null)
+
+const openPreview = (image: EidImage) => {
+  selectedImage.value = image
+}
+
+const closePreview = () => {
+  selectedImage.value = null
+}
 
 defineEmits(['navigate'])
 </script>
@@ -13,10 +41,23 @@ defineEmits(['navigate'])
         <CtaButton @click="$emit('navigate', 'contact')">Commander</CtaButton>
       </div>
       <div class="eid-boxes-images">
-        <img src="/eid_box.jpg" alt="Boîte Eid ouverte">
-        <img src="/eid_box_closed.jpg" alt="Boîte Eid fermée">
+        <img 
+          v-for="image in eidImages" 
+          :key="image.src"
+          :src="image.src" 
+          :alt="image.alt"
+          @click="openPreview(image)"
+        >
       </div>
     </div>
+
+    <ImagePreview
+      v-if="selectedImage"
+      :image="selectedImage.src"
+      :title="selectedImage.alt"
+      description="Boîte Eid personnalisée avec des décorations élégantes"
+      @close="closePreview"
+    />
   </section>
 </template>
 
@@ -68,6 +109,7 @@ defineEmits(['navigate'])
   border-radius: 15px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
+  cursor: pointer;
 }
 
 .eid-boxes-images img:hover {
