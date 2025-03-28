@@ -9,7 +9,7 @@ interface GalleryImage {
   description: string;
 }
 
-const props = defineProps<{
+defineProps<{
   images: GalleryImage[]
 }>();
 

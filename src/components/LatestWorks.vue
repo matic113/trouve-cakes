@@ -9,9 +9,9 @@ interface GalleryImage {
   description: string;
 }
 
-const props = defineProps<{
+defineProps<{
   images: GalleryImage[]
-}>()
+}>();
 
 const selectedImage = ref<GalleryImage | null>(null)
 
