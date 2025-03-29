@@ -64,7 +64,7 @@ defineEmits(['navigate'])
 <style scoped>
 .eid-boxes {
   padding: 4rem 2rem;
-  background-color: #fff5f8;
+  background-color: #ffffff;
   margin: 2rem 0;
   border-radius: 20px;
 }
